@@ -16,6 +16,8 @@ func _physics_process(delta):
 	player_movement(delta)
 	skeleton_attack()
 	attack()
+	current_camera()
+	update_health()
 	
 	if health <= 0:
 		player_alive = false # add end screen
@@ -154,3 +156,28 @@ func _on_deal_attack_timer_timeout():
 	$deal_attack_timer.stop()
 	global.player_current_attack = false
 	attack_ip = false
+
+func current_camera():
+	if global.current_scene == "world":
+		$world_camera.enabled = true
+		$cliffside_camera.enabled = false
+	elif global.current_scene == "cliff_side":
+		$world_camera.enabled = false
+		$cliffside_camera.enabled = true
+
+func update_health():
+	var healthbar = $healthbar
+	healthbar.value = health
+	
+	if health >= 100:
+		healthbar.visible = false
+	else:
+		healthbar.visible = true
+
+func _on_regin_timer_timeout():
+	if health < 100:
+		health = health + 20
+		if health > 100:
+			health = 100
+	if health <= 0:
+		health = 0
