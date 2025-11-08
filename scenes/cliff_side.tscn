@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvkdm53nhhc67"]
+[gd_scene load_steps=12 format=3 uid="uid://cvkdm53nhhc67"]
 
 [ext_resource type="Texture2D" uid="uid://c1kct4bpetgy7" path="res://asset/tiles/Overworld_Tileset.png" id="1_e10jm"]
 [ext_resource type="Script" uid="uid://dtp2nwkjckf7w" path="res://scripts/cliff_side.gd" id="1_v3mbj"]
 [ext_resource type="Texture2D" uid="uid://moa0xbjun0iv" path="res://asset/tiles/Dungeon_Tileset.png" id="2_jcley"]
 [ext_resource type="Texture2D" uid="uid://bvsl76w0r3egu" path="res://asset/tiles/Grass.png" id="3_v3mbj"]
 [ext_resource type="PackedScene" uid="uid://bwaiforsd78xa" path="res://scenes/player.tscn" id="4_jcley"]
+[ext_resource type="PackedScene" uid="uid://b8dcd05jtmkld" path="res://scenes/red.tscn" id="6_ocn37"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ocn37"]
 texture = ExtResource("1_e10jm")
@@ -393,6 +394,9 @@ position = Vector2(127, 185)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="cliffside_exidpoint"]
 position = Vector2(127, 224)
 shape = SubResource("RectangleShape2D_ocn37")
+
+[node name="Red" parent="." instance=ExtResource("6_ocn37")]
+position = Vector2(147, 75)
 
 [connection signal="body_entered" from="cliffside_exidpoint" to="." method="_on_cliffside_exidpoint_body_entered"]
 [connection signal="body_exited" from="cliffside_exidpoint" to="." method="_on_cliffside_exidpoint_body_exited"]
