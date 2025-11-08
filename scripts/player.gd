@@ -11,6 +11,10 @@ var current_dir = "none"
 
 func _ready():
 	$AnimatedSprite2D.play("idle_down")
+	
+	if global.player_health > 0:
+		health = global.player_health
+	update_health()
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -18,6 +22,8 @@ func _physics_process(delta):
 	attack()
 	current_camera()
 	update_health()
+	
+	global.save_player_state(health, 100, position)
 	
 	if health <= 0:
 		player_alive = false # add end screen
@@ -107,6 +113,8 @@ func skeleton_attack():
 		skeleton_attack_cooldown = false
 		$attack_cooldown.start()
 		print(health)
+		
+		global.save_player_state(health, 100, position)
 
 func _on_attack_cooldown_timeout():
 	skeleton_attack_cooldown = true
@@ -158,12 +166,29 @@ func _on_deal_attack_timer_timeout():
 	attack_ip = false
 
 func current_camera():
-	if global.current_scene == "world":
-		$world_camera.enabled = true
-		$cliffside_camera.enabled = false
-	elif global.current_scene == "cliff_side":
-		$world_camera.enabled = false
-		$cliffside_camera.enabled = true
+	#if global.current_scene == "world":
+		#$world_camera.enabled = true
+		#$cliffside_camera.enabled = false
+	#elif global.current_scene == "cliff_side":
+		#$world_camera.enabled = false
+		#$cliffside_camera.enabled = true
+		
+	$world_camera.enabled = false
+	$cliffside_camera.enabled = false
+	$dungeon_camera.enabled = false
+	$main_house_camera.enabled = false
+	
+	match global.current_scene:
+		"world":
+			$world_camera.enabled = true
+		"cliff_side":
+			$cliffside_camera.enabled = true
+		"dungeon":
+			$dungeon_camera.enabled = true
+		"main_house":
+			$main_house_camera.enabled = true
+			
+			$world_camera.enabled = true
 
 func update_health():
 	var healthbar = $healthbar
@@ -179,5 +204,8 @@ func _on_regin_timer_timeout():
 		health = health + 20
 		if health > 100:
 			health = 100
+			
+		global.save_player_state(health, 100, position)
+			
 	if health <= 0:
 		health = 0

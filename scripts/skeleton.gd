@@ -86,6 +86,9 @@ func _physics_process(delta):
 			else:
 				anim.play("walk_up")
 				last_dir = "up"
+				
+			move_and_slide() # untuk hindari tilemap
+			
 	else:
 		match last_dir:
 			"right":

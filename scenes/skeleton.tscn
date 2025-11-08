@@ -398,6 +398,8 @@ radius = 3.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_i0f3v"]
 
 [node name="skeleton" type="CharacterBody2D"]
+y_sort_enabled = true
+collision_layer = 3
 script = ExtResource("1_i0f3v")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

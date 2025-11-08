@@ -12,6 +12,10 @@ var player_start_posy = 104
 
 var game_first_loadin = true
 
+var player_health = 100
+var player_max_health = 100
+var player_position = Vector2.ZERO
+
 #func finish_changescenes():
 	#if transition_scene == true:
 		#transition_scene = false
@@ -25,8 +29,30 @@ func finish_changescenes():
 	# Reset transisi biar siap dipakai lagi
 	transition_scene = false
 	
-	# Toggle antara world dan cliff_side
-	if current_scene == "world":
-		current_scene = "cliff_side"
-	else:
-		current_scene = "world"
+	## Toggle antara world dan cliff_side
+	#if current_scene == "world":
+		#current_scene = "cliff_side"
+	#else:
+		#current_scene = "world"
+		
+	match current_scene:
+		"world":
+			current_scene = "cliff_side"
+		"cliff_side":
+			current_scene = "world"
+		"dungeon":
+			current_scene = "cliff_side"
+		"main_house":
+			current_scene = "world"
+
+func save_player_state(health, max_health, position):
+	player_health = health
+	player_max_health = max_health
+	player_position = position
+
+func get_player_state():
+	return {
+		"health": player_health,
+		"max_health": player_max_health,
+		"position": player_position
+	}

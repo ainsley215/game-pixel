@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cvkdm53nhhc67"]
+[gd_scene load_steps=13 format=3 uid="uid://cvkdm53nhhc67"]
 
 [ext_resource type="Texture2D" uid="uid://c1kct4bpetgy7" path="res://asset/tiles/Overworld_Tileset.png" id="1_e10jm"]
 [ext_resource type="Script" uid="uid://dtp2nwkjckf7w" path="res://scripts/cliff_side.gd" id="1_v3mbj"]
@@ -104,8 +104,11 @@ texture = ExtResource("1_e10jm")
 4:6/0 = 0
 5:6/0 = 0
 6:6/0 = 0
+6:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5.485691, 8, -5.66555, 8, -8, -8, -8)
 7:6/0 = 0
+7:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5.485691, 8, -5.66555, 8, -8, -8, -8)
 8:6/0 = 0
+8:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -5.485691, 8, -5.66555, 8, -8, -8, -8)
 14:6/0 = 0
 15:6/0 = 0
 16:6/0 = 0
@@ -128,8 +131,11 @@ texture = ExtResource("1_e10jm")
 4:8/0 = 0
 5:8/0 = 0
 6:8/0 = 0
+6:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 3.327385, -4.1367493, 5.66555, 8, 5.485691, 8, -8, -8, -8)
 7:8/0 = 0
+7:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 3.327385, -4.1367493, 5.66555, 8, 5.485691, 8, -8, -8, -8)
 8:8/0 = 0
+8:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, 3.327385, -4.1367493, 5.66555, 8, 5.485691, 8, -8, -8, -8)
 14:8/0 = 0
 17:8/0 = 0
 10:9/0 = 0
@@ -189,8 +195,9 @@ texture = ExtResource("1_e10jm")
 12:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(22.622787, 34.09349, 23.26004, 29.951286, 38.55432, 29.951286, 39.19159, 16.887428, -40.78473, 17.206055, -40.46611, 34.412117)
 7:9/size_in_atlas = Vector2i(3, 2)
 7:9/0 = 0
-7:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9.283979, 14.613672, -9.226671, 5.9027767, -24.184193, 5.616234, -24.184193, 14.728289)
-7:9/0/physics_layer_0/polygon_1/points = PackedVector2Array(9.169365, 5.73085, 23.95496, 5.616234, 24.012268, 14.613672, 9.112057, 14.441744)
+7:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-24.28093, -5.305832, -10.2519455, -5.485691, -9.712372, 13.939053, -24.28093, 13.399475)
+7:9/0/physics_layer_0/polygon_1/points = PackedVector2Array(9.3526535, 13.039757, 23.741356, 13.219616, 24.101067, -4.9461155, 9.532509, -5.1259727)
+7:9/0/physics_layer_0/polygon_2/points = PackedVector2Array(-16.367142, -5.8454094, -16.72686, -13.039759, 16.72686, -13.399475, 16.72686, -5.66555)
 3:9/size_in_atlas = Vector2i(2, 3)
 3:9/0 = 0
 3:9/0/y_sort_origin = 15
@@ -340,6 +347,8 @@ texture = ExtResource("2_jcley")
 9:12/0 = 0
 6:0/size_in_atlas = Vector2i(3, 2)
 6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9.8022995, -1.7086582, -9.622437, 15.37792, -18.435516, 15.018202, -18.075798, 10.701593, -24.011139, 11.061312, -24.370857, -1.1690826)
+6:0/0/physics_layer_0/polygon_1/points = PackedVector2Array(11.241165, -2.7878113, 23.471573, -2.428093, 24.190994, 11.061312, 18.795242, 11.061312, 18.435516, 15.37792, 9.0828705, 15.198061, 9.982162, -2.7878113)
 6:2/size_in_atlas = Vector2i(3, 2)
 6:2/0 = 0
 7:6/size_in_atlas = Vector2i(1, 2)
@@ -364,6 +373,8 @@ sources/2 = SubResource("TileSetAtlasSource_ygqrx")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ocn37"]
 size = Vector2(29, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0riok"]
 
 [node name="cliff_side" type="Node2D"]
 y_sort_enabled = true
@@ -398,5 +409,14 @@ shape = SubResource("RectangleShape2D_ocn37")
 [node name="Red" parent="." instance=ExtResource("6_ocn37")]
 position = Vector2(147, 75)
 
+[node name="dungeon" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dungeon"]
+top_level = true
+position = Vector2(167, 46)
+shape = SubResource("RectangleShape2D_0riok")
+
 [connection signal="body_entered" from="cliffside_exidpoint" to="." method="_on_cliffside_exidpoint_body_entered"]
 [connection signal="body_exited" from="cliffside_exidpoint" to="." method="_on_cliffside_exidpoint_body_exited"]
+[connection signal="body_entered" from="dungeon" to="." method="_on_dungeon_body_entered"]
+[connection signal="body_exited" from="dungeon" to="." method="_on_dungeon_body_exited"]
