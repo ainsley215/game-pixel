@@ -5,10 +5,30 @@ var player_current_attack = false
 var current_scene = "world" # world cliftt_side
 var transition_scene = false
 
-var player_exit_cliffside_posx = 127
-var player_exit_cliffside_posy = 15
-var player_start_posx = 229
-var player_start_posy = 104
+var previous_scene = ""
+var next_scene = ""
+#var player_exit_cliffside_posx = 127
+#var player_exit_cliffside_posy = 15
+#var player_start_posx = 229
+#var player_start_posy = 104
+
+var player_positions = {
+	"world": {
+		"entry": Vector2(129, 90),
+		"exit_to_cliff_side": Vector2(128, 23),
+		"exit_to_main_house": Vector2(229, 104)
+	},
+	"cliff_side": {
+		"entry_from_world": Vector2(128, 192),
+		"exit_to_dungeon": Vector2(167, 60)
+	},
+	"main_house": {
+		"entry_from_world": Vector2(161, 177)
+	},
+	"dungeon": {
+		"entry_from_cliff_side": Vector2(442, 1004)
+	}
+}
 
 var game_first_loadin = true
 
@@ -25,25 +45,31 @@ var player_position = Vector2.ZERO
 			#current_scene = "world"
 
 
-func finish_changescenes():
-	# Reset transisi biar siap dipakai lagi
+#func finish_changescenes():
+	## Reset transisi biar siap dipakai lagi
+	#transition_scene = false
+	#
+	### Toggle antara world dan cliff_side
+	##if current_scene == "world":
+		##current_scene = "cliff_side"
+	##else:
+		##current_scene = "world"
+		#
+	#match current_scene:
+		#"world":
+			#current_scene = "cliff_side"
+		#"cliff_side":
+			#current_scene = "world"
+		#"dungeon":
+			#current_scene = "cliff_side"
+		#"main_house":
+			#current_scene = "world"
+
+func finish_changescenes(new_scene_name: String):
+	previous_scene = current_scene
+	current_scene = new_scene_name
+	print("Scene change registered. From:", previous_scene, "to:", current_scene)
 	transition_scene = false
-	
-	## Toggle antara world dan cliff_side
-	#if current_scene == "world":
-		#current_scene = "cliff_side"
-	#else:
-		#current_scene = "world"
-		
-	match current_scene:
-		"world":
-			current_scene = "cliff_side"
-		"cliff_side":
-			current_scene = "world"
-		"dungeon":
-			current_scene = "cliff_side"
-		"main_house":
-			current_scene = "world"
 
 func save_player_state(health, max_health, position):
 	player_health = health

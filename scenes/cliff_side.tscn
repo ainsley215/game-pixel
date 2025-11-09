@@ -398,7 +398,7 @@ layer_2/tile_data = PackedInt32Array(0, 196608, 9, 1, 196608, 9, 2, 65536, 2, 3,
 polygon = PackedVector2Array(39, 13, 110, 12, 110, 28, 128, 29, 129, 46, 143, 47, 143, 55, 159, 55, 160, 35, 178, 36, 178, 55, 191, 55, 193, 47, 207, 45, 207, 26, 340, 26, 340, 157, 142, 157, 143, 237, 111, 238, 112, 160, 26, 158, 29, 11, 27, -31, -66, -28, -63, 268, 461, 267, 463, -57, 28, -63)
 
 [node name="player" parent="." instance=ExtResource("4_jcley")]
-position = Vector2(127, 185)
+position = Vector2(128, 192)
 
 [node name="cliffside_exidpoint" type="Area2D" parent="."]
 
