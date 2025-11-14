@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbi6fjcqeh141"]
+
+[ext_resource type="Texture2D" uid="uid://b4wkroa2s05af" path="res://asset/objects/Props_Items_(animated)/Sprite.png" id="1_0reak"]
+[ext_resource type="Script" uid="uid://csjhx0m2uu2m3" path="res://scripts/weapon_pickup.gd" id="1_8i8db"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8i8db"]
+radius = 8.062258
+
+[node name="weapon_pickup" type="Area2D"]
+y_sort_enabled = true
+collision_layer = 2
+script = ExtResource("1_8i8db")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_0reak")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8i8db")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

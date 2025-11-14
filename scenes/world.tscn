@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://b1w8yqiu1f670"]
+[gd_scene load_steps=12 format=3 uid="uid://b1w8yqiu1f670"]
 
 [ext_resource type="Texture2D" uid="uid://c1kct4bpetgy7" path="res://asset/tiles/Overworld_Tileset.png" id="1_4wyf3"]
 [ext_resource type="Script" uid="uid://cnkbvlw8jiujp" path="res://scripts/world.gd" id="1_qfnet"]
 [ext_resource type="Texture2D" uid="uid://moa0xbjun0iv" path="res://asset/tiles/Dungeon_Tileset.png" id="2_k0juu"]
 [ext_resource type="Texture2D" uid="uid://bvsl76w0r3egu" path="res://asset/tiles/Grass.png" id="3_71j4m"]
 [ext_resource type="PackedScene" uid="uid://bwaiforsd78xa" path="res://scenes/player.tscn" id="4_k0juu"]
-[ext_resource type="PackedScene" uid="uid://cuayqgwyahlfo" path="res://scenes/skeleton.tscn" id="5_71j4m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qfnet"]
 texture = ExtResource("1_4wyf3")
@@ -388,9 +387,6 @@ layer_2/tile_data = PackedInt32Array(0, 196608, 9, 65536, 196608, 9, 131072, 196
 
 [node name="player" parent="." instance=ExtResource("4_k0juu")]
 position = Vector2(128, 23)
-
-[node name="skeleton" parent="." instance=ExtResource("5_71j4m")]
-position = Vector2(173, 120)
 
 [node name="collisions" type="StaticBody2D" parent="."]
 

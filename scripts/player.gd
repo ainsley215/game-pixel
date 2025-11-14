@@ -1,13 +1,18 @@
 extends CharacterBody2D
 
-var skeleton_inattack_range = false
-var skeleton_attack_cooldown = true
+var enemy_in_attack_range = null
+var enemy_attack_cooldown = true
 var health = 100
 var player_alive = true
 var attack_ip = false
 
 const speed = 100
 var current_dir = "none"
+
+var enemy_methods = ["skeleton", "snake", "samurai"]
+
+var has_weapon = false
+var current_weapon = null
 
 func _ready():
 	$AnimatedSprite2D.play("idle_down")
@@ -18,7 +23,7 @@ func _ready():
 
 func _physics_process(delta):
 	player_movement(delta)
-	skeleton_attack()
+	enemy_attack()
 	attack()
 	current_camera()
 	update_health()
@@ -100,24 +105,44 @@ func player():
 	pass
 
 func _on_player_hitbox_body_entered(body):
-	if body.has_method("skeleton"):
-		skeleton_inattack_range = true
+	#if body.has_method("skeleton"):
+		#skeleton_inattack_range = true
+		
+	if body.is_in_group("enemy"):
+		enemy_in_attack_range = body
 
 func _on_player_hitbox_body_exited(body):
-	if body.has_method("skeleton"):
-		skeleton_inattack_range = false
-
-func skeleton_attack():
-	if skeleton_inattack_range and skeleton_attack_cooldown == true:
-		health = health - 10
-		skeleton_attack_cooldown = false
-		$attack_cooldown.start()
-		print(health)
+	#if body.has_method("skeleton"):
+		#skeleton_inattack_range = false
 		
+	if body == enemy_in_attack_range:
+		enemy_in_attack_range = null
+
+#func skeleton_attack():
+	#if enemy_in_attack_range and enemy_attack_cooldown == true:
+		#health = health - 10
+		#enemy_attack_cooldown = false
+		#$attack_cooldown.start()
+		#print(health)
+		#
+		#global.save_player_state(health, 100, position)
+		
+
+func enemy_attack():
+	if enemy_in_attack_range != null and enemy_attack_cooldown:
+		var damage = 10
+		if "damage" in enemy_in_attack_range:
+			damage = enemy_in_attack_range.damage
+
+		health -= damage
+		print("Player kena serangan dari", enemy_in_attack_range.name, "-> -", damage, "HP")
+
+		enemy_attack_cooldown = false
+		$attack_cooldown.start()
 		global.save_player_state(health, 100, position)
 
 func _on_attack_cooldown_timeout():
-	skeleton_attack_cooldown = true
+	enemy_attack_cooldown = true
 	
 func attack():
 	var dir = current_dir
@@ -142,7 +167,8 @@ func attack():
 			#$deal_attack_timer.start()
 	
 	# gak pakai flip_h
-	if Input.is_action_just_pressed("attack"):
+	#if Input.is_action_just_pressed("attack"):
+	if has_weapon and Input.is_action_just_pressed("attack"):
 		global.player_current_attack = true
 		attack_ip = true
 
@@ -209,3 +235,8 @@ func _on_regin_timer_timeout():
 			
 	if health <= 0:
 		health = 0
+
+func pickup_weapon(weapon):
+	has_weapon = true
+	current_weapon = weapon
+	print("Player mengambil senjata:", weapon)

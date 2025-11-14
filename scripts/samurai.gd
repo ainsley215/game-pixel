@@ -8,43 +8,27 @@ var last_flip = false
 var health = 100
 var player_inattack_zone = false
 var can_take_damage = true
-var damage = 10
+var damage = 15
 
 func _physics_process(delta):
 	
 	deal_with_damage()
 	update_health()
 	
-	#if player_chase:
-		#position += (player.position - position)/speed
-		#
-		#$AnimatedSprite2D.play("")
-		#
-		#if(player.position.x - position.x) < 0:
-			#$AnimatedSprite2D.flip_h = true
-		#else:
-			#$AnimatedSprite2D.flip_h = false
-	#else:
-		#$AnimatedSprite2D.play("")
-		
-	# ini pakai flip_h	
+	## gak pakai flip_h
 	#if player_chase:
 		#var dir = player.position - position
 		#position += dir.normalized() * (speed * delta)
 #
 		#var anim = $AnimatedSprite2D
-#
-		## Cek arah dominan
+		#
 		#if abs(dir.x) > abs(dir.y):
-			#anim.play("walk_right")  # cuma punya animasi kanan
-			#if dir.x < 0:
-				#anim.flip_h = true   # hadap kiri
-				#last_dir = "left"
-				#last_flip = true
-			#else:
-				#anim.flip_h = false  # hadap kanan
+			#if dir.x > 0:
+				#anim.play("walk_right")
 				#last_dir = "right"
-				#last_flip = false
+			#else:
+				#anim.play("walk_left")
+				#last_dir = "left"
 		#else:
 			#if dir.y > 0:
 				#anim.play("walk_down")
@@ -52,27 +36,32 @@ func _physics_process(delta):
 			#else:
 				#anim.play("walk_up")
 				#last_dir = "up"
-	#else:
-		#var anim = $AnimatedSprite2D
-		#match last_dir:
-			#"left":
-				#anim.play("idle_right")
-				#anim.flip_h = true
-			#"right":
-				#anim.play("idle_right")
-				#anim.flip_h = false
-			#"up":
-				#anim.play("idle_up")
-			#"down":
-				#anim.play("idle_down")	
-		
-	# gak pakai flip_h
-	if player_chase:
+				#
+			#move_and_slide() # untuk hindari tilemap
+			
+			
+	var anim = $AnimatedSprite2D
+
+	# ============================
+	# PRIORITAS 1 → ATTACK
+	# ============================
+	if player_inattack_zone:
+		# animasi attack sesuai arah terakhir
+		match last_dir:
+			"right": anim.play("attack_right")
+			"left": anim.play("attack_left")
+			"up": anim.play("attack_up")
+			"down": anim.play("attack_down")
+		return
+
+	# ============================
+	# PRIORITAS 2 → CHASE
+	# ============================
+	if player_chase and player != null:
 		var dir = player.position - position
 		position += dir.normalized() * (speed * delta)
 
-		var anim = $AnimatedSprite2D
-		
+		# Tentukan animasi gerak
 		if abs(dir.x) > abs(dir.y):
 			if dir.x > 0:
 				anim.play("walk_right")
@@ -87,20 +76,20 @@ func _physics_process(delta):
 			else:
 				anim.play("walk_up")
 				last_dir = "up"
-				
-			move_and_slide() # untuk hindari tilemap
-			
-	else:
-		match last_dir:
-			"right":
-				$AnimatedSprite2D.play("idle_right")
-			"left":
-				$AnimatedSprite2D.play("idle_left")
-			"down":
-				$AnimatedSprite2D.play("idle_down")
-			"up":
-				$AnimatedSprite2D.play("idle_up")
-		
+
+		move_and_slide()
+		return
+
+	# ============================
+	# PRIORITAS 3 → IDLE
+	# ============================
+	match last_dir:
+		"right": anim.play("idle_right")
+		"left": anim.play("idle_left")
+		"up": anim.play("idle_up")
+		"down": anim.play("idle_down")
+
+
 func _on_detection_area_body_entered(body):
 	player = body
 	player_chase = true
@@ -109,14 +98,14 @@ func _on_detection_area_body_exited(body):
 	player = null
 	player_chase = false
 
-func skeleton():
+func samurai():
 	pass
 
-func _on_skeleton_hitbox_body_entered(body):
+func _on_samurai_hitbox_body_entered(body):
 	if body.has_method("player"):
 		player_inattack_zone = true
 
-func _on_skeleton_hitbox_body_exited(body):
+func _on_samurai_hitbox_body_exited(body):
 	if body.has_method("player"):
 		player_inattack_zone = false
 
@@ -126,7 +115,7 @@ func deal_with_damage():
 			health = health - 20
 			$take_damage_cooldown.start()
 			can_take_damage = false
-			print("skeleton health = ", health)
+			print("samurai health = ", health)
 			if health <= 0:
 				self.queue_free()
 
