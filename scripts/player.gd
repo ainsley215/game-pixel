@@ -17,9 +17,16 @@ var current_weapon = null
 func _ready():
 	$AnimatedSprite2D.play("idle_down")
 	
+	if global.has_sword:
+		pickup_weapon("sword")
 	if global.player_health > 0:
 		health = global.player_health
 	update_health()
+	
+	#if global.player_health > 0:
+		#health = global.player_health
+	#update_health()
+	
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -235,8 +242,28 @@ func _on_regin_timer_timeout():
 			
 	if health <= 0:
 		health = 0
+		
+#func pickup_weapon(weapon_name):
+	#print("Player got weapon:", weapon_name)
+	#has_sword = true
+	#enable_weapon()
 
 func pickup_weapon(weapon):
 	has_weapon = true
 	current_weapon = weapon
 	print("Player mengambil senjata:", weapon)
+
+#func enable_weapon():
+	#$weapon_pickup.monitoring = true
+	#$weapon_pickup/CollisionShape2D.disabled = false
+	#print("Weapon enabled!")
+#
+#func disable_weapon():
+	#$weapon_pickup.monitoring = false
+	#$weapon_pickup/CollisionShape2D.disabled = true
+	#print("Weapon disabled!")
+
+#func pickup_weapon(weapon_name):
+	#print("Player got weapon:", weapon_name)
+	#global.has_sword = true
+	#enable_weapon()

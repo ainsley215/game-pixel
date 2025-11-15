@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var enemy_id : String = ""
+
 var speed = 40
 var player_chase = false
 var player = null
@@ -9,6 +11,11 @@ var health = 100
 var player_inattack_zone = false
 var can_take_damage = true
 var damage = 5
+
+func _ready():
+	if global.enemy_defeated.has(enemy_id):
+		if global.enemy_defeated[enemy_id] == true:
+			queue_free()
 
 func _physics_process(delta):
 	
@@ -66,7 +73,11 @@ func deal_with_damage():
 			$take_damage_cooldown.start()
 			can_take_damage = false
 			print("skeleton health = ", health)
+			#if health <= 0:
+				#self.queue_free()
+				
 			if health <= 0:
+				global.enemy_defeated[enemy_id] = true
 				self.queue_free()
 
 func _on_take_damage_cooldown_timeout():

@@ -451,51 +451,67 @@ position = Vector2(442, 1004)
 
 [node name="skeleton" parent="." instance=ExtResource("6_hsn05")]
 position = Vector2(562, 169)
+enemy_id = "skeleton_mainhouse_3"
 
 [node name="skeleton2" parent="." instance=ExtResource("6_hsn05")]
 position = Vector2(322, 167)
+enemy_id = "skeleton_mainhouse_4"
 
 [node name="skeleton3" parent="." instance=ExtResource("6_hsn05")]
 position = Vector2(456, 300)
+enemy_id = "skeleton_mainhouse_5"
 
 [node name="snake" parent="." instance=ExtResource("7_etlrv")]
 position = Vector2(362, 109)
+enemy_id = "snake_dungeon_1"
 
 [node name="snake2" parent="." instance=ExtResource("7_etlrv")]
 position = Vector2(379, 277)
+enemy_id = "snake_dungeon_2"
 
 [node name="snake3" parent="." instance=ExtResource("7_etlrv")]
 position = Vector2(512, 100)
+enemy_id = "snake_dungeon_3"
 
 [node name="snake4" parent="." instance=ExtResource("7_etlrv")]
 position = Vector2(738, 468)
+enemy_id = "snake_dungeon_4"
 
 [node name="snake5" parent="." instance=ExtResource("7_etlrv")]
 position = Vector2(154, 354)
+enemy_id = "snake_dungeon_5"
 
 [node name="skeleton4" parent="." instance=ExtResource("6_hsn05")]
 position = Vector2(785, 262)
+enemy_id = "skeleton_mainhouse_6"
 
 [node name="skeleton5" parent="." instance=ExtResource("6_hsn05")]
 position = Vector2(162, 554)
+enemy_id = "skeleton_mainhouse_7"
 
 [node name="skeleton6" parent="." instance=ExtResource("6_hsn05")]
 position = Vector2(430, 561)
+enemy_id = "skeleton_mainhouse_8"
 
 [node name="skeleton7" parent="." instance=ExtResource("6_hsn05")]
 position = Vector2(182, 927)
+enemy_id = "skeleton_mainhouse_9"
 
 [node name="skeleton8" parent="." instance=ExtResource("6_hsn05")]
 position = Vector2(914, 964)
+enemy_id = "skeleton_mainhouse_10"
 
 [node name="snake6" parent="." instance=ExtResource("7_etlrv")]
 position = Vector2(754, 811)
+enemy_id = "snake_dungeon_6"
 
 [node name="skeleton9" parent="." instance=ExtResource("6_hsn05")]
 position = Vector2(439, 778)
+enemy_id = "skeleton_mainhouse_11"
 
 [node name="samurai" parent="." instance=ExtResource("8_etlrv")]
 position = Vector2(437, 94)
+enemy_id = "samurai_dungeon_1"
 
 [connection signal="body_entered" from="dungeon_exidpoint" to="." method="_on_dungeon_exidpoint_body_entered"]
 [connection signal="body_exited" from="dungeon_exidpoint" to="." method="_on_dungeon_exidpoint_body_exited"]

@@ -4,13 +4,16 @@ var player_current_attack = false
 
 var current_scene = "world" # world cliftt_side
 var transition_scene = false
-
+var has_sword: bool = false
 var previous_scene = ""
 var next_scene = ""
 #var player_exit_cliffside_posx = 127
 #var player_exit_cliffside_posy = 15
 #var player_start_posx = 229
 #var player_start_posy = 104
+
+var enemy_defeated = {}
+var pickups_taken := {}
 
 var player_positions = {
 	"world": {
@@ -82,3 +85,9 @@ func get_player_state():
 		"max_health": player_max_health,
 		"position": player_position
 	}
+
+func mark_pickup(id):
+	pickups_taken[id] = true
+
+func is_pickup_taken(id):
+	return pickups_taken.get(id, false)
