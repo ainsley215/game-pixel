@@ -17,4 +17,10 @@ texture = ExtResource("1_0reak")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_8i8db")
 
+[node name="entrance_trigger" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="entrance_trigger"]
+shape = SubResource("CircleShape2D_8i8db")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_entered" from="entrance_trigger" to="." method="_on_entrance_trigger_body_entered"]

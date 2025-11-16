@@ -36,3 +36,8 @@ func _on_body_entered(body):
 		if "pickup_weapon" in body:
 			body.pickup_weapon(weapon_name)
 			queue_free()
+
+
+func _on_entrance_trigger_body_entered(body):
+	if body.name == "player" and not global.pickups_taken.get("sword_main_house", false):
+		DialogueManager.show_example_dialogue_balloon(load("res://dialog/pickup_seord.dialogue"),"start")

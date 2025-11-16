@@ -141,3 +141,22 @@ func update_health():
 		healthbar.visible = false
 	else:
 		healthbar.visible = true
+
+func die():
+	# Hapus enemy dari scene
+	queue_free()
+
+	# Cek kelompoknya
+	if is_in_group("main_house_enemy"):
+		_check_all_enemies_dead("main_house", "main_house_enemy")
+
+	if is_in_group("dungeon_enemy"):
+		_check_all_enemies_dead("dungeon", "dungeon_enemy")
+		
+func _check_all_enemies_dead(area_key: String, group_name: String):
+	var enemies = get_tree().get_nodes_in_group(group_name)
+
+	# Jika size = 1 berarti musuh yg tersisa cuma yang sedang mati ini.
+	if enemies.size() <= 1:
+		global.enemy_defeated[area_key] = true
+		print("Semua musuh di", area_key, "telah mati!")

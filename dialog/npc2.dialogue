@@ -1,0 +1,42 @@
+~ start
+Narrator: Dungeon telah bersih. Mayat-mayat hidup telah tumbang. Samurai penjaga terakhir—yang terlihat seperti pahlawan—kini terbaring tak bernyawa.
+
+Narrator: Saat kau keluar, NPC itu kembali muncul.
+
+NPC: Kau kembali... dan aku bisa merasakan sesuatu. Kekuatanku… mulai pulih.
+
+- Kau terlihat berbeda.
+	Player: Kau terlihat berbeda.
+	NPC: Tentu. Kekuatanku perlahan kembali berkat jasamu.
+- Apa maksudmu?
+	Player: Apa maksudmu?
+	NPC: Samurai di dalam dungeon itu... ia adalah satu-satunya penghalang bagiku.
+- Kau terdengar mencurigakan.
+	Player: Kau terdengar mencurigakan.
+	NPC: Oh? Kau cukup peka rupanya.
+
+NPC: Aku ingin berterima kasih padamu... Kau telah menyingkirkan semua hambatan.
+Player: [[Hambatan? Bukannya itu musuh-musuhmu?|Kenapa kau butuh aku?|Apa sebenarnya tujuanmu?]]
+
+NPC: Kau pantas tahu kebenarannya.
+NPC: Dungeon itu… rumahku. Samurai itu… musuhku. Ia merampas kekuatanku, mengurungku yang telah mengubah warga desa menjadi undead.
+
+- Itu cerita yang aneh.
+	Player: Itu cerita yang aneh.
+- Jadi… aku membantu orang yang salah?
+	Player: Jadi… aku membantu orang yang salah?
+- Kau tidak terdengar seperti korban
+	Player: Kau tidak terdengar seperti korban
+
+NPC: Samurai itu sudah mati sekarang. Dan berkatmu… kekuatanku kembali sepenuhnya.
+
+Narrator: Aura gelap perlahan mengelilinginya. Matanya berubah tajam seolah penuh kebencian.
+
+NPC: Sekarang… tidak ada lagi yang bisa menghentikanku.
+
+Player: [[Tunggu, apa maksudmu?!|Kau bercanda, kan?|Aku tahu ini tidak beres!]]
+
+NPC: Kau sudah melakukan bagianku, sekarang aku hanya perlu menghabisimu… untuk memastikan tidak ada saksi.
+
+Narrator: NPC itu berubah… menjadi BOS sebenarnya.
+=> END

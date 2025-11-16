@@ -1,0 +1,22 @@
+~ start
+NPC: Ah, kau akhirnya datang. Aku melihatmu melawan monster itu... kau cukup berbakat.
+- Siapa kamu?
+	Player: Siapa kamu?
+	NPC: Aku hanya seorang warga yang tersisa... Dunia ini telah dikuasai makhluk-makhluk gelap.
+- Apa tempat ini?
+	Player: Apa tempat ini?
+	NPC: Ini adalah desa yang dulu damai. Sekarang, hanya dungeon penuh mayat hidup.
+- Kenapa ada monster disini?
+	Player: Kenapa ada monster disini?
+	NPC: Itu semua akibat seseorang yang menguasai dungeon itu.
+NPC: Aku butuh bantuanmu... Tolong habisi semua musuh di dungeon. Itu satu-satunya cara menyelamatkan tempat ini.
+
+- Baik, aku akan membantumu.
+	Player: Baik, aku akan membantumu.
+- Aku tidak terlalu suka bertarung, tapi aku akan coba.
+	Player: Aku tidak terlalu suka bertarung, tapi aku akan coba.
+- Kalau ini bisa membawaku pulang, aku lakukan.
+	Player: Kalau ini bisa membawaku pulang, aku lakukan.
+	
+NPC: Terima kasih… Aku menunggumu di luar setelah semua selesai.
+=> END

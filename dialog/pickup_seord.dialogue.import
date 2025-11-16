@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=15
+type="Resource"
+uid="uid://bqit5ejjx0wvd"
+path="res://.godot/imported/pickup_seord.dialogue-2d189ce4e5714a72caed678143d77943.tres"
+
+[deps]
+
+source_file="res://dialog/pickup_seord.dialogue"
+dest_files=["res://.godot/imported/pickup_seord.dialogue-2d189ce4e5714a72caed678143d77943.tres"]
+
+[params]
+
+defaults=true

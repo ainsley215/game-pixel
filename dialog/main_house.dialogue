@@ -1,0 +1,7 @@
+~ start
+Narrator: Saat kau mendekati rumah itu, suara geraman terdengar. Seekor monster berdiri di tengah ruangan tua.
+Player: Aku bahkan tidak punya senjata...
+
+Narrator: Kau melihat sebuah pedang tergeletak di dekat kaki monster itu.
+Player: [[Ambil pedang itu...|Sepertinya pedang itu milikku sekarang.|Aku tidak punya pilihan lain selain mengambil pedang itu.]]
+=> END

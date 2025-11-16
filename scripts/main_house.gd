@@ -51,3 +51,10 @@ func change_scenes():
 			get_tree().change_scene_to_file("res://scenes/world.tscn")
 			global.finish_changescenes("world")
 			global.game_first_loadin = false
+
+
+func _on_entrance_trigger_body_entered(body):
+	if body.name == "player" and global.main_house_dialog_played == false:
+		DialogueManager.show_example_dialogue_balloon(
+			load("res://dialog/main_house.dialogue"),"start")
+		global.main_house_dialog_played = true

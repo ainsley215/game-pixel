@@ -12,8 +12,19 @@ var next_scene = ""
 #var player_start_posx = 229
 #var player_start_posy = 104
 
-var enemy_defeated = {}
+#var enemy_defeated = {}
 var pickups_taken := {}
+
+var prolog_played = false
+var main_house_dialog_played = false
+
+var npc_dialog_1_played = false
+var npc_dialog_2_played = false
+
+var enemy_defeated = {
+	"main_house": false,
+	"dungeon": false
+}
 
 var player_positions = {
 	"world": {
@@ -67,6 +78,12 @@ var player_position = Vector2.ZERO
 			#current_scene = "cliff_side"
 		#"main_house":
 			#current_scene = "world"
+
+func _ready():
+	if global.prolog_played == false:
+		DialogueManager.show_example_dialogue_balloon(
+			load("res://dialog/summon.dialogue"), "start")
+		global.prolog_played = true
 
 func finish_changescenes(new_scene_name: String):
 	previous_scene = current_scene
