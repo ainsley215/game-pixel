@@ -78,6 +78,8 @@
 
 extends CharacterBody2D
 
+@onready var red_hitbox = $red_hitbox
+
 var speed = 40
 var player_chase = false
 var can_attack = false
@@ -88,6 +90,9 @@ var last_flip = false
 enum STATE { IDLE, CHASE, ATTACK }
 var state = STATE.IDLE
 
+func _ready():
+	red_hitbox.monitoring = false
+	red_hitbox.monitorable = false
 
 func _physics_process(delta):
 	match state:
@@ -155,15 +160,17 @@ func _on_detection_area_body_entered(body):
 
 			# ============ NPC mulai menyerang ============
 			await get_tree().create_timer(0.5).timeout
+			
+			red_hitbox.monitoring = true
+			red_hitbox.monitorable = true
+			
 			state = STATE.CHASE
 			player_chase = true
 			can_attack = true
 
 			return
 
-
-
-func _on_detection_area_2_body_entered(body: Node2D) -> void:
+func _on_red_hitbox_body_entered(body):
 	if body.name in ["Player", "player"] and can_attack:
 		state = STATE.ATTACK
 		$AnimatedSprite2D.play("attack")
@@ -174,7 +181,3 @@ func _on_detection_area_2_body_entered(body: Node2D) -> void:
 		# kembali chase setelah attack
 		await get_tree().create_timer(0.8).timeout
 		state = STATE.CHASE
-
-
-func _on_red_hitbox_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.

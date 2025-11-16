@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://b8dcd05jtmkld"]
+[gd_scene load_steps=52 format=3 uid="uid://b8dcd05jtmkld"]
 
 [ext_resource type="Script" uid="uid://bq57jgv71s7iw" path="res://scripts/red.gd" id="1_8flnf"]
 [ext_resource type="Texture2D" uid="uid://dkxe7b5o0t0qo" path="res://asset/characters/Npc/SPRITE_SHEET.png" id="1_10bml"]
@@ -338,13 +338,16 @@ radius = 22.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_8flnf"]
 radius = 11.045361
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_vskon"]
+radius = 3.0
+
 [node name="Red" type="CharacterBody2D" groups=["enemy"]]
 script = ExtResource("1_8flnf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g4rxb")
 animation = &"walk"
-frame_progress = 0.22660938
+frame_progress = 0.64234245
 offset = Vector2(-2, -7)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -358,13 +361,16 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
 shape = SubResource("CircleShape2D_10bml")
 
-[node name="detection_area2" type="Area2D" parent="."]
+[node name="red_hitbox" type="Area2D" parent="."]
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="red_hitbox"]
 shape = SubResource("CircleShape2D_8flnf")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vskon")
+
 [connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
-[connection signal="body_entered" from="detection_area2" to="." method="_on_detection_area_2_body_entered"]
+[connection signal="body_entered" from="red_hitbox" to="." method="_on_red_hitbox_body_entered"]
