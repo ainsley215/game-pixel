@@ -56,5 +56,5 @@ func change_scenes():
 func _on_entrance_trigger_body_entered(body):
 	if body.name == "player" and global.main_house_dialog_played == false:
 		DialogueManager.show_example_dialogue_balloon(
-			load("res://dialog/summon.dialogue"),"start")
+			load("res://dialog/main_house.dialogue"),"start")
 		global.main_house_dialog_played = true

@@ -41,6 +41,7 @@ func _physics_process(delta):
 		player_alive = false # add end screen
 		health = 0
 		print("player has been killed")
+		get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
 		self.queue_free()
 
 func player_movement(delta):
@@ -176,6 +177,8 @@ func attack():
 	# gak pakai flip_h
 	#if Input.is_action_just_pressed("attack"):
 	if has_weapon and Input.is_action_just_pressed("attack"):
+		$attack_sound.pitch_scale = randf_range(0.9, 1.1)
+		$attack_sound.play()
 		global.player_current_attack = true
 		attack_ip = true
 

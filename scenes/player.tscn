@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://bwaiforsd78xa"]
+[gd_scene load_steps=90 format=3 uid="uid://bwaiforsd78xa"]
 
 [ext_resource type="Script" uid="uid://rkf0f2vcsf2q" path="res://scripts/player.gd" id="1_urp6f"]
 [ext_resource type="Texture2D" uid="uid://db7lgqt0ofvi8" path="res://asset/characters/Player/Attack/Char_atk_down.png" id="2_bwjto"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dmwfo08uiwv53" path="res://asset/characters/Player/Walk/Char_walk_left.png" id="11_7lmhl"]
 [ext_resource type="Texture2D" uid="uid://b7ba0uhdq3rgw" path="res://asset/characters/Player/Walk/Char_walk_right.png" id="12_dx0e4"]
 [ext_resource type="Texture2D" uid="uid://r6u7x760dah6" path="res://asset/characters/Player/Walk/Char_walk_up.png" id="13_jm5j8"]
+[ext_resource type="PackedScene" uid="uid://dah2dokkjnplx" path="res://scenes/attack_sound.tscn" id="14_f1ej7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7hik5"]
 atlas = ExtResource("2_bwjto")
@@ -669,6 +670,8 @@ limit_smoothed = true
 rotation_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
+
+[node name="attack_sound" parent="." instance=ExtResource("14_f1ej7")]
 
 [connection signal="body_entered" from="player_hitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="player_hitbox" to="." method="_on_player_hitbox_body_exited"]

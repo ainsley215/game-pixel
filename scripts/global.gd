@@ -22,6 +22,8 @@ var main_house_dialog_played = false
 var npc_dialog_1_played = false
 var npc_dialog_2_played = false
 
+var player_attack_locked = false
+
 var enemy_defeated = {
 	"main_house": false,
 	"dungeon": false

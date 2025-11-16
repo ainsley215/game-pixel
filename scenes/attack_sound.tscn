@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dah2dokkjnplx"]
+
+[ext_resource type="AudioStream" uid="uid://b568iosbfnlod" path="res://asset/slash1-94367.mp3" id="1_sji3i"]
+
+[node name="attack_sound" type="AudioStreamPlayer"]
+stream = ExtResource("1_sji3i")
+volume_db = -2.0

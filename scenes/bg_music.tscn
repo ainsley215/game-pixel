@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu2dsxk5ernur"]
+
+[ext_resource type="AudioStream" uid="uid://p6tonkydgq8g" path="res://asset/rpg-city-8381.mp3" id="1_f6gl3"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_f6gl3")
+autoplay = true
