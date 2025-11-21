@@ -1,12 +1,15 @@
 extends CharacterBody2D
 
+var joystick
+var attack_button
+
 var enemy_in_attack_range = null
 var enemy_attack_cooldown = true
 var health = 100
 var player_alive = true
 var attack_ip = false
 
-const speed = 100
+const speed = 40
 var current_dir = "none"
 
 var enemy_methods = ["skeleton", "snake", "samurai"]
@@ -27,6 +30,11 @@ func _ready():
 		#health = global.player_health
 	#update_health()
 	
+	joystick = get_tree().get_first_node_in_group("virtual_joystick")
+
+	if joystick:
+		joystick.connect("joystick_moved", Callable(self, "_on_joystick_move"))
+	
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -46,30 +54,55 @@ func _physics_process(delta):
 
 func player_movement(delta):
 	
-	if Input.is_action_pressed("ui_right"):
-		current_dir = "right"
+	if joystick and joystick.is_pressed:
+		move_and_slide()
+		return
+		
+	var input_vector = Vector2.ZERO
+	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	
+	if input_vector != Vector2.ZERO:
+		input_vector = input_vector.normalized()
+		velocity = input_vector * speed
+
+		# Tentukan arah animasi
+		if abs(input_vector.x) > abs(input_vector.y):
+			current_dir = "right" if input_vector.x > 0 else "left"
+		else:
+			current_dir = "down" if input_vector.y > 0 else "up"
+
 		play_anim(1)
-		velocity.x = speed
-		velocity.y = 0
-	elif Input.is_action_pressed("ui_left"):
-		current_dir = "left"
-		play_anim(1)
-		velocity.x = -speed
-		velocity.y = 0
-	elif Input.is_action_pressed("ui_down"):
-		current_dir = "down"
-		play_anim(1)
-		velocity.y = speed
-		velocity.x = 0
-	elif Input.is_action_pressed("ui_up"):
-		current_dir = "up"
-		play_anim(1)
-		velocity.y = -speed
-		velocity.x = 0
 	else:
+		velocity = Vector2.ZERO
 		play_anim(0)
-		velocity.x = 0
-		velocity.y = 0
+
+	move_and_slide()
+	
+	#if Input.is_action_pressed("ui_right"):
+		#current_dir = "right"
+		#play_anim(1)
+		#velocity.x = speed
+		#velocity.y = 0
+	#elif Input.is_action_pressed("ui_left"):
+		#current_dir = "left"
+		#play_anim(1)
+		#velocity.x = -speed
+		#velocity.y = 0
+	#elif Input.is_action_pressed("ui_down"):
+		#current_dir = "down"
+		#play_anim(1)
+		#velocity.y = speed
+		#velocity.x = 0
+	#elif Input.is_action_pressed("ui_up"):
+		#current_dir = "up"
+		#play_anim(1)
+		#velocity.y = -speed
+		#velocity.x = 0
+	#else:
+		#play_anim(0)
+		#velocity.x = 0
+		#velocity.y = 0
 	
 	move_and_slide()
 
@@ -154,6 +187,9 @@ func _on_attack_cooldown_timeout():
 	
 func attack():
 	var dir = current_dir
+	
+	if Input.is_action_just_pressed("attack"):
+		print("ATTACK ACTION DETECTED!")
 	
 	# pakai flip_h
 	#if Input.is_action_just_pressed("attack"):
@@ -270,3 +306,17 @@ func pickup_weapon(weapon):
 	#print("Player got weapon:", weapon_name)
 	#global.has_sword = true
 	#enable_weapon()
+
+func _on_joystick_move(dir: Vector2):
+	if dir.length() > 0.1:
+		velocity = dir.normalized() * (speed * 0.1)
+
+		if abs(dir.x) > abs(dir.y):
+			current_dir = "right" if dir.x > 0 else "left"
+		else:
+			current_dir = "down" if dir.y > 0 else "up"
+
+		play_anim(1)
+	else:
+		velocity = Vector2.ZERO
+		play_anim(0)

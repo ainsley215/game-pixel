@@ -93,6 +93,10 @@ func change_scene():
 			global.next_scene = "cliff_side"
 			global.game_first_loadin = false
 			get_tree().change_scene_to_file("res://scenes/cliff_side.tscn")
+			Input.action_release("ui_up")
+			Input.action_release("ui_down")
+			Input.action_release("ui_left")
+			Input.action_release("ui_right")
 
 			
 		"main_house":
@@ -100,10 +104,59 @@ func change_scene():
 			global.finish_changescenes("main_house")
 			global.game_first_loadin = false
 			get_tree().change_scene_to_file("res://scenes/main_house.tscn")
+			Input.action_release("ui_up")
+			Input.action_release("ui_down")
+			Input.action_release("ui_left")
+			Input.action_release("ui_right")
 			
 
+#func _on_entrance_trigger_body_entered(body):
+	#if body.name == "player" and global.world_dialog_played == false:
+		#DialogueManager.show_example_dialogue_balloon(
+			#load("res://dialog/summon.dialogue"),"start")
+			#
+		#await get_tree().create_timer(5.0).timeout
+		#DialogueManager.dismiss_balloon()
+		#print("Dialog auto dismissed!")
+		#
+		#global.world_dialog_played = true
+		
 func _on_entrance_trigger_body_entered(body):
 	if body.name == "player" and global.world_dialog_played == false:
+		# Tampilkan dialog
 		DialogueManager.show_example_dialogue_balloon(
 			load("res://dialog/summon.dialogue"),"start")
+		
+		# Auto-next setiap 4 detik
+		_start_auto_dialog()
+		
 		global.world_dialog_played = true
+
+func _start_auto_dialog():
+	# Timer untuk auto-next setiap 4 detik
+	var timer = Timer.new()
+	timer.wait_time = 4.0  # 4 detik per line
+	timer.autostart = true
+	add_child(timer)
+	
+	# Counter untuk batas maksimal
+	var line_count = 0
+	var max_lines = 5  # Maksimal 5 line agar tidak infinite
+	
+	timer.timeout.connect(func():
+		if line_count < max_lines:
+			print("Auto-next dialog line ", line_count + 1)
+			
+			# Simulate SPACE untuk next
+			var space_event = InputEventAction.new()
+			space_event.action = "ui_accept"
+			space_event.pressed = true
+			Input.parse_input_event(space_event)
+			
+			line_count += 1
+		else:
+			# Stop timer setelah max lines
+			print("Auto-dialog finished")
+			timer.stop()
+			timer.queue_free()
+	)

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://btjbi4u5k0tfn"]
+
+[ext_resource type="Script" uid="uid://dl5b0j4bcc7c8" path="res://scripts/mobile_dialog_touch.gd" id="1_5ix2u"]
+
+[node name="ColorRect" type="ColorRect"]
+offset_right = 1158.0
+offset_bottom = 648.0
+color = Color(1, 1, 1, 0)
+script = ExtResource("1_5ix2u")

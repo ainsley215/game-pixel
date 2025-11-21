@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpvs5cv72d472"]
+
+[ext_resource type="PackedScene" uid="uid://pkdmtqpmjppq" path="res://addons/virtual_joystick/virtual_attack_button.tscn" id="1_qiynl"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="VirtualAttackButton" parent="." instance=ExtResource("1_qiynl")]

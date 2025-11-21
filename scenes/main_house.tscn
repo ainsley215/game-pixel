@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bcwoiip0xcue3"]
+[gd_scene load_steps=16 format=3 uid="uid://bcwoiip0xcue3"]
 
 [ext_resource type="Script" uid="uid://lccjrw2y4uxw" path="res://scripts/main_house.gd" id="1_26umc"]
 [ext_resource type="Texture2D" uid="uid://c1kct4bpetgy7" path="res://asset/tiles/Overworld_Tileset.png" id="1_ee48l"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bwaiforsd78xa" path="res://scenes/player.tscn" id="5_gmmk2"]
 [ext_resource type="PackedScene" uid="uid://cuayqgwyahlfo" path="res://scenes/skeleton.tscn" id="6_nlaq8"]
 [ext_resource type="PackedScene" uid="uid://cbi6fjcqeh141" path="res://scenes/weapon_pickup.tscn" id="7_gmmk2"]
+[ext_resource type="PackedScene" uid="uid://me10ql7e7aog" path="res://scenes/ui_layer.tscn.tscn" id="8_nlaq8"]
+[ext_resource type="PackedScene" uid="uid://bpvs5cv72d472" path="res://scenes/ui_attack_layer.tscn" id="9_5e3qg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_26umc"]
 texture = ExtResource("1_ee48l")
@@ -428,6 +430,14 @@ position = Vector2(189, 117)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="entrance_trigger"]
 position = Vector2(161, 174)
 shape = SubResource("CircleShape2D_gmmk2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasLayer" parent="CanvasLayer" instance=ExtResource("8_nlaq8")]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="CanvasLayer" parent="CanvasLayer2" instance=ExtResource("9_5e3qg")]
 
 [connection signal="body_entered" from="mainhouse_exidpoint" to="." method="_on_mainhouse_exidpoint_body_entered"]
 [connection signal="body_exited" from="mainhouse_exidpoint" to="." method="_on_mainhouse_exidpoint_body_exited"]

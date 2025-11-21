@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cvkdm53nhhc67"]
+[gd_scene load_steps=15 format=3 uid="uid://cvkdm53nhhc67"]
 
 [ext_resource type="Texture2D" uid="uid://c1kct4bpetgy7" path="res://asset/tiles/Overworld_Tileset.png" id="1_e10jm"]
 [ext_resource type="Script" uid="uid://dtp2nwkjckf7w" path="res://scripts/cliff_side.gd" id="1_v3mbj"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bvsl76w0r3egu" path="res://asset/tiles/Grass.png" id="3_v3mbj"]
 [ext_resource type="PackedScene" uid="uid://bwaiforsd78xa" path="res://scenes/player.tscn" id="4_jcley"]
 [ext_resource type="PackedScene" uid="uid://b8dcd05jtmkld" path="res://scenes/red.tscn" id="6_ocn37"]
+[ext_resource type="PackedScene" uid="uid://me10ql7e7aog" path="res://scenes/ui_layer.tscn.tscn" id="7_0riok"]
+[ext_resource type="PackedScene" uid="uid://bpvs5cv72d472" path="res://scenes/ui_attack_layer.tscn" id="8_ygqrx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ocn37"]
 texture = ExtResource("1_e10jm")
@@ -415,6 +417,14 @@ position = Vector2(147, 75)
 top_level = true
 position = Vector2(167, 46)
 shape = SubResource("RectangleShape2D_0riok")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasLayer" parent="CanvasLayer" instance=ExtResource("7_0riok")]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="CanvasLayer" parent="CanvasLayer2" instance=ExtResource("8_ygqrx")]
 
 [connection signal="body_entered" from="cliffside_exidpoint" to="." method="_on_cliffside_exidpoint_body_entered"]
 [connection signal="body_exited" from="cliffside_exidpoint" to="." method="_on_cliffside_exidpoint_body_exited"]

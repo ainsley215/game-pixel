@@ -1,11 +1,6 @@
 ~ start
 Narrator: Kabut perlahan menghilang. Kau terbangun di tanah asing. Udara di sini terasa berbeda… dingin, namun penuh bahaya.
-- Dimana aku...?
-	Player: Dimana aku...?
-- Bagaimana cara aku sampai di sini?
-	Player: Bagaimana cara aku sampai di sini?
-- Apa nama tempat ini?
-	Player: Apa nama tempat ini?
+Player: Dimana aku...?
 Narrator: Sebuah rumah tua tampak tidak jauh dari tempatmu berdiri.
 Player: Mungkin ada seseorang di sana.
 => END

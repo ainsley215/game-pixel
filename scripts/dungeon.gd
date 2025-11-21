@@ -56,3 +56,7 @@ func change_scenes():
 			get_tree().change_scene_to_file("res://scenes/cliff_side.tscn")
 			global.finish_changescenes("cliff_side")
 			global.game_first_loadin = false
+			Input.action_release("ui_up")
+			Input.action_release("ui_down")
+			Input.action_release("ui_left")
+			Input.action_release("ui_right")

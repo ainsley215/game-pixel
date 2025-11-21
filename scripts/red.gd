@@ -143,6 +143,7 @@ func _on_detection_area_body_entered(body):
 		DialogueManager.show_example_dialogue_balloon(
 			load("res://dialog/npc1.dialogue"), "start"
 		)
+		_start_auto_dialog()
 		global.npc_dialog_1_played = true
 		return
 
@@ -155,7 +156,7 @@ func _on_detection_area_body_entered(body):
 			DialogueManager.show_example_dialogue_balloon(
 				load("res://dialog/npc2.dialogue"), "start"
 			)
-
+			_start_auto_dialog()
 			global.npc_dialog_2_played = true
 
 			# ============ NPC mulai menyerang ============
@@ -181,3 +182,33 @@ func _on_red_hitbox_body_entered(body):
 		# kembali chase setelah attack
 		await get_tree().create_timer(0.8).timeout
 		state = STATE.CHASE
+
+func _start_auto_dialog():
+	# Timer untuk auto-next setiap 4 detik
+	var timer = Timer.new()
+	timer.wait_time = 4.0  # 4 detik per line
+	timer.autostart = true
+	add_child(timer)
+	
+	# Counter untuk batas maksimal
+	var line_count = 0
+	var max_lines = 5  # Maksimal 5 line agar tidak infinite
+	
+	timer.timeout.connect(func():
+		if line_count < max_lines:
+			print("Auto-next dialog line ", line_count + 1)
+			
+			# Simulate SPACE untuk next
+			var space_event = InputEventAction.new()
+			space_event.action = "ui_accept"
+			space_event.pressed = true
+			Input.parse_input_event(space_event)
+			
+			line_count += 1
+		else:
+			# Stop timer setelah max lines
+			print("Auto-dialog finished")
+			timer.stop()
+			timer.queue_free()
+	)
+	

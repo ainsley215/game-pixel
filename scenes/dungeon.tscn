@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://2hkt2o4glnwp"]
+[gd_scene load_steps=16 format=3 uid="uid://2hkt2o4glnwp"]
 
 [ext_resource type="Script" uid="uid://8j8gmoftg54q" path="res://scripts/dungeon.gd" id="1_0wj4k"]
 [ext_resource type="Texture2D" uid="uid://c1kct4bpetgy7" path="res://asset/tiles/Overworld_Tileset.png" id="1_fpimf"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cuayqgwyahlfo" path="res://scenes/skeleton.tscn" id="6_hsn05"]
 [ext_resource type="PackedScene" uid="uid://dmlguorhrke6a" path="res://scenes/snake.tscn" id="7_etlrv"]
 [ext_resource type="PackedScene" uid="uid://18oi26fq1edo" path="res://scenes/samurai.tscn" id="8_etlrv"]
+[ext_resource type="PackedScene" uid="uid://me10ql7e7aog" path="res://scenes/ui_layer.tscn.tscn" id="9_tkjml"]
+[ext_resource type="PackedScene" uid="uid://bpvs5cv72d472" path="res://scenes/ui_attack_layer.tscn" id="10_5hkx1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ys5p8"]
 texture = ExtResource("1_fpimf")
@@ -512,6 +514,14 @@ enemy_id = "skeleton_mainhouse_11"
 [node name="samurai" parent="." groups=["dungeon_enemy"] instance=ExtResource("8_etlrv")]
 position = Vector2(437, 94)
 enemy_id = "samurai_dungeon_1"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CanvasLayer" parent="CanvasLayer" instance=ExtResource("9_tkjml")]
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="CanvasLayer" parent="CanvasLayer2" instance=ExtResource("10_5hkx1")]
 
 [connection signal="body_entered" from="dungeon_exidpoint" to="." method="_on_dungeon_exidpoint_body_entered"]
 [connection signal="body_exited" from="dungeon_exidpoint" to="." method="_on_dungeon_exidpoint_body_exited"]
